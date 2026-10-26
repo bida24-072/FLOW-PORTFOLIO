@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Flow Digital Studio</title>
+    <meta name="description" content="Request a quotation from Flow Digital Studio. Websites, systems, branding and print design in Botswana.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0A0A0C;
+            --surface: #121218;
+            --surface-2: #1A1A22;
+            --text: #F2F2F5;
+            --muted: #8A8A99;
+            --accent: #2E7BFF;
+            --accent-glow: rgba(46, 123, 255, 0.35);
+            --red: #FF2E4D;
+            --red-glow: rgba(255, 46, 77, 0.35);
+            --border: #23232E;
+            --display: 'Space Grotesk', sans-serif;
+            --sans: 'Inter', sans-serif;
+            --transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(ellipse at 12% 0%, rgba(46, 123, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 88% 100%, rgba(255, 46, 77, 0.06) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img, video { display: block; max-width: 100%; }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 32px; width: 100%; }
+
+        /* ---------- HEADER ---------- */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            background: rgba(10, 10, 12, 0.85);
+            position: sticky; top: 0; z-index: 1000;
+            backdrop-filter: blur(12px);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            font-family: var(--display); font-size: 1.6rem; font-weight: 700;
+            letter-spacing: -0.03em; display: flex; align-items: center; gap: 8px;
+        }
+        .logo-mark {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--red));
+            color: #fff; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; box-shadow: 0 0 18px var(--accent-glow);
+        }
+        .nav-links { display: flex; gap: 32px; font-size: 0.9rem; font-weight: 600; }
+        .nav-links a { position: relative; color: var(--muted); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -6px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+        .nav-cta {
+            background: var(--accent); color: #fff; padding: 12px 24px;
+            border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+            transition: var(--transition); position: relative; overflow: hidden;
+        }
+        .nav-cta::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .nav-cta:hover::before { left: 100%; }
+        .nav-cta:hover {
+            background: var(--red); transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px var(--red-glow);
+        }
+
+        /* ---------- BUTTONS ---------- */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 15px 28px; border-radius: 10px;
+            font-size: 0.9rem; font-weight: 600; cursor: pointer; border: none;
+            font-family: var(--sans); transition: var(--transition);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent), #4A8DFF);
+            color: #fff; box-shadow: 0 12px 30px -14px var(--accent-glow);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, var(--red), #FF5C74);
+            transform: translateY(-3px);
+            box-shadow: 0 18px 36px -14px var(--red-glow);
+        }
+        .btn-primary i { transition: transform 0.3s ease; }
+        .btn-primary:hover i { transform: translateX(4px); }
+        .btn-block { width: 100%; }
+
+        /* ---------- HERO WITH VIDEO ---------- */
+        .page-hero {
+            position: relative; isolation: isolate; overflow: hidden;
+            padding: 120px 0 100px;
+        }
+        .page-hero .video-bg {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -2;
+            filter: brightness(0.4) saturate(1.15) contrast(1.05);
+        }
+        .page-hero .hero-overlay {
+            position: absolute; inset: 0; z-index: -1;
+            background:
+                linear-gradient(100deg, rgba(10,10,12,0.97) 0%, rgba(10,10,12,0.86) 45%, rgba(10,10,12,0.5) 100%),
+                radial-gradient(ellipse at 85% 15%, rgba(46,123,255,0.20) 0%, transparent 60%),
+                radial-gradient(ellipse at 10% 95%, rgba(255,46,77,0.14) 0%, transparent 55%);
+        }
+        .page-hero::after {
+            content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 75%);
+            opacity: 0.5;
+        }
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-label {
+            display: inline-block;
+            background: rgba(255,46,77,0.12); color: var(--red);
+            border: 1px solid rgba(255,46,77,0.35);
+            padding: 6px 16px; border-radius: 40px;
+            font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            margin-bottom: 24px; backdrop-filter: blur(6px);
+            opacity: 0; animation: fadeUp 0.8s ease forwards;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .page-hero h1 {
+            font-family: var(--display);
+            font-size: clamp(2.8rem, 6.5vw, 5.4rem);
+            font-weight: 500; line-height: 1; letter-spacing: -0.04em;
+            margin-bottom: 22px; max-width: 850px;
+            text-shadow: 0 2px 30px rgba(0,0,0,0.5);
+            opacity: 0; animation: fadeUp 0.8s ease 0.12s forwards;
+        }
+        .page-hero h1 span {
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .page-hero p {
+            font-size: 1.12rem; color: #C7C7D1; max-width: 540px;
+            text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+            opacity: 0; animation: fadeUp 0.8s ease 0.24s forwards;
+        }
+
+        /* ---------- CONTACT LAYOUT ---------- */
+        .contact-block { padding: 90px 0 40px; }
+        .contact-grid {
+            display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px;
+            align-items: start;
+        }
+
+        /* Form */
+        .form-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 40px;
+            box-shadow: 0 30px 60px -34px rgba(0,0,0,0.9);
+            position: relative; overflow: hidden;
+        }
+        .form-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--red));
+        }
+        .form-card h2 {
+            font-family: var(--display); font-size: 1.7rem; font-weight: 700;
+            letter-spacing: -0.02em; margin-bottom: 8px;
+        }
+        .form-card > p { color: var(--muted); font-size: 0.94rem; margin-bottom: 30px; }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .field { margin-bottom: 20px; }
+        .field label {
+            display: block; font-size: 0.78rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 9px;
+        }
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%; padding: 14px 16px;
+            background: #0E0E14; color: var(--text);
+            border: 1px solid var(--border); border-radius: 10px;
+            font-family: var(--sans); font-size: 0.94rem;
+            transition: var(--transition); outline: none;
+        }
+        .field textarea { resize: vertical; min-height: 130px; }
+        .field input::placeholder,
+        .field textarea::placeholder { color: #55555F; }
+        .field input:focus,
+        .field textarea:focus,
+        .field select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(46,123,255,0.15);
+            background: #101018;
+        }
+        .select-wrap { position: relative; }
+        .select-wrap::after {
+            content: '\25BE'; position: absolute; right: 16px; top: 50%;
+            transform: translateY(-50%); color: var(--muted);
+            pointer-events: none; font-size: 0.8rem;
+        }
+        .field select { appearance: none; -webkit-appearance: none; padding-right: 40px; cursor: pointer; }
+        .field select option { background: #121218; color: var(--text); }
+
+        .form-note {
+            font-size: 0.8rem; color: var(--muted);
+            margin-top: 16px; text-align: center; line-height: 1.5;
+        }
+        .form-note a { color: var(--accent); font-weight: 600; }
+        .form-note a:hover { color: var(--red); }
+
+        .form-success {
+            display: none; margin-top: 16px; padding: 14px 18px;
+            border-radius: 10px; font-size: 0.88rem;
+            background: rgba(46,123,255,0.1);
+            border: 1px solid rgba(46,123,255,0.35);
+            color: #9CC0FF;
+        }
+        .form-success.show { display: block; animation: fadeUp 0.4s ease; }
+
+        /* Info column */
+        .info-col h3 {
+            font-family: var(--display); font-size: 1.35rem; font-weight: 700;
+            letter-spacing: -0.02em; margin-bottom: 8px;
+        }
+        .info-col > p { color: var(--muted); font-size: 0.94rem; margin-bottom: 26px; }
+
+        .info-card {
+            display: flex; gap: 16px; align-items: flex-start;
+            padding: 20px; margin-bottom: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            transition: var(--transition);
+        }
+        .info-card:hover {
+            transform: translateX(5px);
+            background: var(--surface-2);
+            border-color: rgba(46,123,255,0.4);
+        }
+        .info-icon {
+            width: 44px; height: 44px; flex-shrink: 0;
+            border-radius: 12px; display: grid; place-items: center;
+            background: rgba(46,123,255,0.12); color: var(--accent);
+            border: 1px solid rgba(46,123,255,0.25); font-size: 1rem;
+        }
+        .info-card:nth-of-type(2) .info-icon {
+            background: rgba(255,46,77,0.1); color: var(--red);
+            border-color: rgba(255,46,77,0.25);
+        }
+        .info-card h4 {
+            font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.09em;
+            color: var(--muted); margin-bottom: 4px; font-weight: 700;
+        }
+        .info-card a, .info-card span.value {
+            font-weight: 600; font-size: 0.95rem; color: var(--text);
+            display: inline-block;
+        }
+        .info-card a:hover { color: var(--accent); }
+
+        .socials { display: flex; gap: 12px; margin-top: 24px; }
+        .socials a {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: grid; place-items: center;
+            border: 1px solid var(--border); color: var(--muted);
+            background: var(--surface); font-size: 0.95rem;
+        }
+        .socials a:hover {
+            color: #fff; border-color: transparent;
+            background: linear-gradient(135deg, var(--accent), var(--red));
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px -12px var(--accent-glow);
+        }
+
+        /* ---------- NEXT STEPS ---------- */
+        .next-steps { padding: 60px 0 90px; }
+        .section-head { max-width: 700px; margin-bottom: 44px; }
+        .eyebrow {
+            display: inline-block; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--red); margin-bottom: 14px;
+        }
+        .section-head h2 {
+            font-family: var(--display);
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            font-weight: 500; line-height: 1.12; letter-spacing: -0.03em;
+        }
+        .section-head h2 span { color: var(--accent); }
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+        .step {
+            padding: 28px 26px; border-radius: 16px;
+            border: 1px solid var(--border);
+            background: linear-gradient(160deg, rgba(46,123,255,0.07) 0%, rgba(18,18,24,0.4) 55%, transparent 100%);
+            transition: var(--transition);
+        }
+        .step:hover {
+            border-color: rgba(255,46,77,0.35);
+            transform: translateY(-5px);
+        }
+        .step-num {
+            font-family: var(--display); font-size: 1.8rem; font-weight: 700;
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block; margin-bottom: 12px; line-height: 1;
+        }
+        .step h4 {
+            font-family: var(--display); font-size: 1.02rem;
+            font-weight: 700; margin-bottom: 9px;
+        }
+        .step p { color: var(--muted); font-size: 0.88rem; }
+
+        /* ---------- MAP ---------- */
+        .map-band {
+            margin: 0 32px 70px; border-radius: 24px; overflow: hidden;
+            border: 1px solid var(--border); position: relative;
+            box-shadow: 0 30px 60px -34px rgba(0,0,0,0.9);
+        }
+        .map-band iframe {
+            width: 100%; height: 380px; border: 0; display: block;
+            filter: grayscale(1) invert(0.9) contrast(0.85) brightness(0.92);
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer { padding: 60px 0 30px; }
+        .footer-top {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            flex-wrap: wrap; gap: 40px; margin-bottom: 60px;
+        }
+        .footer-brand h3 {
+            font-family: var(--display); font-size: 2rem; font-weight: 700;
+            letter-spacing: -0.03em; margin-bottom: 12px;
+        }
+        .footer-brand h3 span {
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .footer-brand p { color: var(--muted); max-width: 300px; }
+        .footer-links { display: flex; gap: 80px; }
+        .footer-col h4 {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 20px; color: var(--muted);
+        }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: var(--text); font-weight: 500; position: relative; }
+        .footer-col ul li a::after {
+            content: ''; position: absolute; bottom: -2px; left: 0;
+            width: 0; height: 1px;
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            transition: width 0.3s ease;
+        }
+        .footer-col ul li a:hover::after { width: 100%; }
+        .footer-col ul li a:hover { color: var(--accent); }
+        .footer-bottom {
+            border-top: 1px solid var(--border); padding-top: 30px;
+            display: flex; justify-content: space-between;
+            color: var(--muted); font-size: 0.9rem; flex-wrap: wrap; gap: 12px;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 1024px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .page-hero { padding: 90px 0 80px; }
+            .form-card { padding: 30px 24px; }
+            .steps-grid { grid-template-columns: 1fr; }
+            .map-band { margin: 0 20px 50px; }
+            .footer-top { flex-direction: column; }
+            .footer-links { flex-direction: column; gap: 40px; }
+        }
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><i class="fas fa-wave-square"></i></div>
+                Flow<span style="color: var(--red);">.</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#work">Work</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+            <a href="#quote" class="nav-cta">Request a Quote</a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO WITH VIDEO BACKGROUND -->
+        <section class="page-hero">
+            <video class="video-bg" autoplay muted loop playsinline
+                   poster="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=85">
+                <source src="https://cdn.pixabay.com/video/2021/04/12/70860-535850940_large.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-content">
+                <span class="hero-label">Get in Touch</span>
+                <h1>Let's build something<br>that <span>flows.</span></h1>
+                <p>Send your brief and we'll come back with a written quotation — usually within 48 hours. No obligation, no pressure.</p>
+            </div>
+        </section>
+
+        <!-- CONTACT FORM + INFO -->
+        <section class="contact-block container" id="quote">
+            <div class="contact-grid">
+
+                <!-- FORM -->
+                <div class="form-card">
+                    <h2>Request a quotation</h2>
+                    <p>Fill in what you know — we'll ask about the rest.</p>
+
+                    <form id="quoteForm">
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="name">Full name</label>
+                                <input id="name" name="name" type="text" placeholder="e.g. Kagiso M." required>
+                            </div>
+                            <div class="field">
+                                <label for="email">Email</label>
+                                <input id="email" name="email" type="email" placeholder="you@company.co.bw" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="phone">Phone / WhatsApp</label>
+                                <input id="phone" name="phone" type="tel" placeholder="+267 7X XXX XXX">
+                            </div>
+                            <div class="field">
+                                <label for="service">Service needed</label>
+                                <div class="select-wrap">
+                                    <select id="service" name="service">
+                                        <option>Website or Web App</option>
+                                        <option>Business System / Dashboard</option>
+                                        <option>E-Commerce Store</option>
+                                        <option>Logo &amp; Brand Identity</option>
+                                        <option>Flyers &amp; Print Design</option>
+                                        <option>Point of Sale System</option>
+                                        <option>Social Media &amp; Content</option>
+                                        <option>Maintenance &amp; Support</option>
+                                        <option>Something else</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="budget">Budget range (BWP)</label>
+                                <div class="select-wrap">
+                                    <select id="budget" name="budget">
+                                        <option>Not sure yet</option>
+                                        <option>Under P5,000</option>
+                                        <option>P5,000 – P15,000</option>
+                                        <option>P15,000 – P40,000</option>
+                                        <option>P40,000 – P100,000</option>
+                                        <option>P100,000+</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="timeline">Timeline</label>
+                                <div class="select-wrap">
+                                    <select id="timeline" name="timeline">
+                                        <option>Flexible</option>
+                                        <option>ASAP (within 2 weeks)</option>
+                                        <option>Within a month</option>
+                                        <option>1 – 3 months</option>
+                                        <option>Just exploring</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="message">Project details</label>
+                            <textarea id="message" name="message" placeholder="Tell us what you're building, who it's for, and anything you already have (logo, content, references)…" required></textarea>
+                        </div>
+
+                        <button class="btn btn-primary btn-block" type="submit">
+                            Send Request <i class="fas fa-paper-plane"></i>
+                        </button>
+
+                        <div class="form-success" id="formSuccess">
+                            Opening WhatsApp with your request… If nothing happens, email us at
+                            <a href="mailto:hello@flow.co.bw">hello@flow.co.bw</a>.
+                        </div>
+
+                        <p class="form-note">
+                            This opens WhatsApp with your details pre-filled. Prefer email?
+                            <a href="mailto:hello@flow.co.bw">hello@flow.co.bw</a>
+                        </p>
+                    </form>
+                </div>
+
+                <!-- INFO -->
+                <div class="info-col">
+                    <h3>Talk to a human.</h3>
+                    <p>We reply to every serious enquiry — usually the same day.</p>
+
+                    <a href="mailto:hello@flow.co.bw" class="info-card">
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>Email</h4>
+                            <span class="value">hello@flow.co.bw</span>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/26771234567" target="_blank" rel="noopener" class="info-card">
+                        <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <span class="value">+267 71 234 567</span>
+                        </div>
+                    </a>
+
+                    <a href="tel:+26771234567" class="info-card">
+                        <div class="info-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <h4>Call</h4>
+                            <span class="value">+267 71 234 567</span>
+                        </div>
+                    </a>
+
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-location-dot"></i></div>
+                        <div>
+                            <h4>Studio</h4>
+                            <span class="value">Gaborone, Botswana</span>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h4>Hours</h4>
+                            <span class="value">Mon – Fri · 08:00 – 17:00</span>
+                        </div>
+                    </div>
+
+                    <div class="socials">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- NEXT STEPS -->
+        <section class="next-steps container">
+            <div class="section-head">
+                <span class="eyebrow">What Happens Next</span>
+                <h2>From enquiry to <span>quotation in 48 hours.</span></h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step">
+                    <span class="step-num">01</span>
+                    <h4>We read your brief</h4>
+                    <p>Every request is read by a person, not a bot. If anything is unclear, we'll ask.</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">02</span>
+                    <h4>We scope &amp; price</h4>
+                    <p>We define the deliverables, the timeline and the cost — no hidden extras.</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">03</span>
+                    <h4>You get the quote</h4>
+                    <p>A written quotation lands in your inbox or WhatsApp within 48 hours.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAP -->
+        <div class="map-band">
+            <iframe
+                src="https://www.google.com/maps?q=Gaborone,Botswana&output=embed"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Flow Digital Studio location — Gaborone, Botswana"></iframe>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3>Flow<span>.</span></h3>
+                    <p>Building the digital infrastructure for Botswana's most ambitious businesses.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="index.html#work">Work</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:hello@flow.co.bw">hello@flow.co.bw</a></li>
+                            <li><a href="tel:+26771234567">+267 71 234 567</a></li>
+                            <li><a href="#">Gaborone, Botswana</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Socials</h4>
+                        <ul>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="#">TikTok</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Flow Digital Studio.</span>
+                <span>Built in Botswana 🇧🇼</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Build a WhatsApp message from the quotation form
+        const form = document.getElementById('quoteForm');
+        const success = document.getElementById('formSuccess');
+        const STUDIO_NUMBER = '26771234567'; // <- change to your real number
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const data = new FormData(form);
+            const lines = [
+                'New quotation request — Flow Digital Studio',
+                '',
+                'Name: ' + (data.get('name') || '—'),
+                'Email: ' + (data.get('email') || '—'),
+                'Phone: ' + (data.get('phone') || '—'),
+                'Service: ' + (data.get('service') || '—'),
+                'Budget: ' + (data.get('budget') || '—'),
+                'Timeline: ' + (data.get('timeline') || '—'),
+                '',
+                'Details:',
+                (data.get('message') || '—')
+            ];
+
+            const url = 'https://wa.me/' + STUDIO_NUMBER +
+                        '?text=' + encodeURIComponent(lines.join('\n'));
+
+            success.classList.add('show');
+            window.open(url, '_blank');
+        });
+
+        // Pre-select service from ?service= links on services.html
+        const params = new URLSearchParams(window.location.search);
+        const preset = params.get('service');
+        const map = {
+            website: 'Website or Web App',
+            systems: 'Business System / Dashboard',
+            ecommerce: 'E-Commerce Store',
+            branding: 'Logo & Brand Identity',
+            print: 'Flyers & Print Design',
+            pos: 'Point of Sale System',
+            content: 'Social Media & Content',
+            support: 'Maintenance & Support'
+        };
+        if (preset && map[preset]) {
+            const select = document.getElementById('service');
+            Array.from(select.options).forEach(opt => {
+                if (opt.text === map[preset]) select.value = opt.text;
+            });
+        }
+    </script>
+
+</body>
+</html>
