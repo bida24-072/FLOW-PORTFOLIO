@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow — Digital Product Studio</title>
+    <meta name="description" content="Flow is a digital product studio building web apps, platforms, and tools for ambitious businesses.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           RESET & VARIABLES
+        ============================================ */
+        :root {
+            --bg: #F9F8F6;       /* Warm Cream */
+            --surface: #FFFFFF;
+            --text: #111111;     /* Off-Black */
+            --muted: #666666;
+            --accent: #6C3CE9;   /* Electric Purple */
+            --accent-hover: #5429C9;
+            --border: #E8E5DF;
+            --display: 'Space Grotesk', sans-serif;
+            --sans: 'Inter', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--sans);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 32px; width: 100%; }
+
+        /* ============================================
+           HEADER
+        ============================================ */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            background: var(--text);
+            color: var(--bg);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           HERO SECTION
+        ============================================ */
+        .hero {
+            padding: 120px 0 100px;
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: #EBE5FF;
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: var(--display);
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 500;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+            max-width: 1000px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* ============================================
+           PROJECTS GRID
+        ============================================ */
+        .portfolio-section {
+            padding: 40px 0 100px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .project-card {
+            display: block;
+            position: relative;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        }
+
+        .project-image-wrap {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            background: #eee;
+            position: relative;
+        }
+
+        .project-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .project-image-wrap img {
+            transform: scale(1.03);
+        }
+
+        .project-info {
+            padding: 32px;
+        }
+
+        .project-info h3 {
+            font-family: var(--display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .project-category {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .project-info p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           SERVICES LIST
+        ============================================ */
+        .services-section {
+            background: var(--text);
+            color: var(--bg);
+            padding: 100px 0;
+            border-radius: 32px;
+            margin: 0 32px 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .services-text h2 {
+            font-family: var(--display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .services-text p {
+            color: #999;
+            font-size: 1.1rem;
+            max-width: 400px;
+        }
+
+        .service-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid #333;
+            font-family: var(--display);
+            font-size: 1.4rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .service-item:hover {
+            color: var(--accent);
+            padding-left: 10px;
+        }
+
+        .service-item i {
+            font-size: 1rem;
+            color: var(--accent);
+            transform: rotate(-45deg);
+        }
+
+        /* ============================================
+           FOOTER
+        ============================================ */
+        footer {
+            padding: 60px 0 30px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-family: var(--display);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            color: var(--muted);
+            max-width: 300px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 80px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            color: var(--muted);
+        }
+
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: var(--text); font-weight: 500; }
+        .footer-col ul li a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 900px) {
+            .projects-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; gap: 40px; }
+            .services-section { margin: 0 20px 40px; border-radius: 20px; }
+            .footer-top { flex-direction: column; }
+            .footer-links { flex-direction: column; gap: 40px; }
+            .nav-links { display: none; }
+            .hero { padding: 80px 0 60px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><i class="fas fa-wave-square"></i></div>
+                Flow<span style="color: var(--accent);">.</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#work" class="active">Work</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="#contact" class="nav-cta">Start a Project</a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero container">
+            <div class="hero-label">Digital Product Studio</div>
+            <h1>We build digital products that <span>flow.</span></h1>
+            <p>From full-scale web applications to business systems, we design and engineer the tools that move ambitious businesses forward.</p>
+        </section>
+
+        <!-- PORTFOLIO GRID -->
+        <section id="work" class="portfolio-section container">
+            <div class="projects-grid">
+
+                <!-- Project 1 -->
+                <a href="#" class="project-card">
+                    <div class="project-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80" alt="CarLink Botswana">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Marketplace · Web App</span>
+                        <h3>CarLink Botswana</h3>
+                        <p>A dynamic car marketplace featuring AI-powered search, comprehensive filtering, and seamless WhatsApp lead generation for a local car dealer.</p>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="#" class="project-card">
+                    <div class="project-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1000&q=80" alt="Motshelo Fintech">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Fintech · System</span>
+                        <h3>Motshelo System</h3>
+                        <p>A digital stokvel platform allowing savings groups to track contributions, manage rotation schedules, and generate proof-of-savings reports.</p>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="#" class="project-card">
+                    <div class="project-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=80" alt="Kasi POS">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Retail · Software</span>
+                        <h3>Kasi POS</h3>
+                        <p>A lightweight point-of-sale system built for local spaza shops, featuring inventory management, VAT calculation, and printable receipts.</p>
+                    </div>
+                </a>
+
+                <!-- Project 4 -->
+                <a href="#" class="project-card">
+                    <div class="project-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80" alt="Maatla Boutique">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">E-Commerce · Brand</span>
+                        <h3>Maatla Boutique</h3>
+                        <p>An elegant digital storefront for a premium fashion brand. Includes a persistent shopping cart and a seamless WhatsApp checkout flow.</p>
+                    </div>
+                </a>
+
+                <!-- Project 5 -->
+                <a href="#" class="project-card">
+                    <div class="project-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1000&q=80" alt="Pula Report">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Media · Platform</span>
+                        <h3>Pula Report</h3>
+                        <p>A data-driven media brand and platform for publishing economic insights, tracking market trends, and distributing reports.</p>
+                    </div>
+                </a>
+
+                <!-- Project 6 -->
+                <a href="#" class="project-card">
+                    <div class="project-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=1000&q=80" alt="VAPID Store">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Retail · E-Commerce</span>
+                        <h3>VAPID Store</h3>
+                        <p>A modern retail site featuring a strict age-verification gate, dynamic product grids, and a dark-mode UI designed for a premium brand.</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="services-section">
+            <div class="container services-grid">
+                <div class="services-text">
+                    <h2>We handle the entire lifecycle.</h2>
+                    <p>From the initial wireframe to the final line of code, Flow is your technical partner.</p>
+                </div>
+                <div class="service-list">
+                    <a href="#contact" class="service-item">
+                        <span>Web Development</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="service-item">
+                        <span>Product Strategy</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="service-item">
+                        <span>UI/UX Design</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="service-item">
+                        <span>Business Systems</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3>Flow.</h3>
+                    <p>Building the digital infrastructure for Botswana's most ambitious businesses.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#work">Work</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:hello@flow.co.bw">hello@flow.co.bw</a></li>
+                            <li><a href="tel:+26771234567">+267 71 234 567</a></li>
+                            <li><a href="#">Gaborone, Botswana</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Socials</h4>
+                        <ul>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="#">TikTok</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Flow Digital Studio.</span>
+                <span>Built in Botswana 🇧🇼</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
