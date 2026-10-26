@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services — Flow Digital Studio</title>
+    <meta name="description" content="Websites, business systems, logos, flyers and more. Flow Digital Studio issues quotations on request.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0A0A0C;
+            --surface: #121218;
+            --surface-2: #1A1A22;
+            --text: #F2F2F5;
+            --muted: #8A8A99;
+            --accent: #2E7BFF;
+            --accent-hover: #1A5FE0;
+            --accent-glow: rgba(46, 123, 255, 0.35);
+            --red: #FF2E4D;
+            --red-glow: rgba(255, 46, 77, 0.35);
+            --border: #23232E;
+            --display: 'Space Grotesk', sans-serif;
+            --sans: 'Inter', sans-serif;
+            --transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(ellipse at 12% 0%, rgba(46, 123, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 88% 100%, rgba(255, 46, 77, 0.06) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img, video { display: block; max-width: 100%; }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 32px; width: 100%; }
+
+        /* ---------- HEADER ---------- */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            background: rgba(10, 10, 12, 0.85);
+            position: sticky; top: 0; z-index: 1000;
+            backdrop-filter: blur(12px);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            font-family: var(--display); font-size: 1.6rem; font-weight: 700;
+            letter-spacing: -0.03em; display: flex; align-items: center; gap: 8px;
+        }
+        .logo-mark {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--red));
+            color: #fff; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; box-shadow: 0 0 18px var(--accent-glow);
+        }
+        .nav-links { display: flex; gap: 32px; font-size: 0.9rem; font-weight: 600; }
+        .nav-links a { position: relative; color: var(--muted); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -6px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+        .nav-cta {
+            background: var(--accent); color: #fff; padding: 12px 24px;
+            border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+            transition: var(--transition); position: relative; overflow: hidden;
+        }
+        .nav-cta::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        .nav-cta:hover::before { left: 100%; }
+        .nav-cta:hover {
+            background: var(--red); transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px var(--red-glow);
+        }
+
+        /* ---------- BUTTONS ---------- */
+        .btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 15px 28px; border-radius: 10px;
+            font-size: 0.9rem; font-weight: 600; cursor: pointer; border: none;
+            transition: var(--transition);
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent), #4A8DFF);
+            color: #fff; box-shadow: 0 12px 30px -14px var(--accent-glow);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(90deg, var(--red), #FF5C74);
+            transform: translateY(-3px);
+            box-shadow: 0 18px 36px -14px var(--red-glow);
+        }
+        .btn-primary i { transition: transform 0.3s ease; }
+        .btn-primary:hover i { transform: translateX(4px); }
+        .btn-ghost {
+            border: 1px solid var(--border); color: var(--text);
+            background: rgba(255,255,255,0.02);
+        }
+        .btn-ghost:hover {
+            border-color: var(--accent); color: var(--accent);
+            transform: translateY(-3px); box-shadow: 0 12px 26px -16px var(--accent-glow);
+        }
+
+        /* ---------- PAGE HERO WITH VIDEO ---------- */
+        .page-hero {
+            position: relative; isolation: isolate; overflow: hidden;
+            padding: 150px 0 130px;
+        }
+        .page-hero .video-bg {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -2;
+            filter: brightness(0.45) saturate(1.15) contrast(1.05);
+        }
+        .page-hero .hero-overlay {
+            position: absolute; inset: 0; z-index: -1;
+            background:
+                linear-gradient(100deg, rgba(10,10,12,0.97) 0%, rgba(10,10,12,0.88) 45%, rgba(10,10,12,0.5) 100%),
+                radial-gradient(ellipse at 85% 15%, rgba(46,123,255,0.20) 0%, transparent 60%),
+                radial-gradient(ellipse at 10% 95%, rgba(255,46,77,0.14) 0%, transparent 55%);
+        }
+        /* Fine tech grid texture */
+        .page-hero::after {
+            content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 75%);
+            opacity: 0.55;
+        }
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-label {
+            display: inline-block;
+            background: rgba(46,123,255,0.15); color: var(--accent);
+            border: 1px solid rgba(46,123,255,0.35);
+            padding: 6px 16px; border-radius: 40px;
+            font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            margin-bottom: 24px; backdrop-filter: blur(6px);
+            opacity: 0; animation: fadeUp 0.8s ease forwards;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .page-hero h1 {
+            font-family: var(--display);
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 500; line-height: 1; letter-spacing: -0.04em;
+            margin-bottom: 24px; max-width: 950px;
+            text-shadow: 0 2px 30px rgba(0,0,0,0.5);
+            opacity: 0; animation: fadeUp 0.8s ease 0.12s forwards;
+        }
+        .page-hero h1 span {
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .page-hero p {
+            font-size: 1.15rem; color: #C7C7D1; max-width: 580px;
+            margin-bottom: 40px; text-shadow: 0 1px 12px rgba(0,0,0,0.6);
+            opacity: 0; animation: fadeUp 0.8s ease 0.24s forwards;
+        }
+        .hero-actions {
+            display: flex; flex-wrap: wrap; gap: 16px;
+            opacity: 0; animation: fadeUp 0.8s ease 0.36s forwards;
+        }
+
+        /* ---------- SECTION HEADINGS ---------- */
+        .section-head { max-width: 720px; margin-bottom: 56px; }
+        .eyebrow {
+            display: inline-block; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: var(--red); margin-bottom: 16px;
+        }
+        .section-head h2 {
+            font-family: var(--display);
+            font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+            font-weight: 500; line-height: 1.1; letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+        .section-head h2 span { color: var(--accent); }
+        .section-head p { color: var(--muted); font-size: 1.05rem; max-width: 560px; }
+
+        /* ---------- SERVICE CARDS ---------- */
+        .services-block { padding: 100px 0 40px; }
+        .cards-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        }
+        .svc-card {
+            position: relative; display: block; overflow: hidden;
+            padding: 32px 28px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            transition: var(--transition);
+        }
+        .svc-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .svc-card:hover::before { transform: scaleX(1); }
+        .svc-card:hover {
+            transform: translateY(-6px);
+            background: var(--surface-2);
+            border-color: rgba(46,123,255,0.45);
+            box-shadow: 0 24px 46px -20px rgba(0,0,0,0.8), 0 0 32px -14px var(--accent-glow);
+        }
+        .svc-icon {
+            width: 52px; height: 52px; border-radius: 14px;
+            display: grid; place-items: center;
+            background: rgba(46,123,255,0.12); color: var(--accent);
+            border: 1px solid rgba(46,123,255,0.25);
+            font-size: 1.2rem; margin-bottom: 22px;
+            transition: var(--transition);
+        }
+        .svc-card:hover .svc-icon {
+            background: linear-gradient(135deg, var(--accent), var(--red));
+            color: #fff; border-color: transparent;
+            box-shadow: 0 0 26px var(--accent-glow);
+            transform: rotate(-4deg) scale(1.04);
+        }
+        .svc-num {
+            position: absolute; top: 28px; right: 28px;
+            font-family: var(--display); font-size: 0.78rem;
+            letter-spacing: 0.14em; color: #3A3A46;
+            transition: color 0.3s ease;
+        }
+        .svc-card:hover .svc-num { color: var(--red); }
+        .svc-card h3 {
+            font-family: var(--display); font-size: 1.22rem;
+            font-weight: 700; letter-spacing: -0.01em; margin-bottom: 10px;
+        }
+        .svc-card p { color: var(--muted); font-size: 0.92rem; margin-bottom: 20px; }
+        .svc-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+        .svc-tags span {
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.03em;
+            padding: 4px 11px; border-radius: 20px;
+            border: 1px solid var(--border); color: var(--muted);
+            transition: var(--transition);
+        }
+        .svc-card:hover .svc-tags span {
+            border-color: rgba(46,123,255,0.3); color: #C7C7D1;
+        }
+        .svc-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.82rem; font-weight: 700;
+            letter-spacing: 0.02em; color: var(--accent);
+        }
+        .svc-cta i { transition: transform 0.3s ease; font-size: 0.75rem; }
+        .svc-card:hover .svc-cta i { transform: translateX(5px); }
+        .svc-card:hover .svc-cta { color: var(--red); }
+
+        /* ---------- QUOTATION PROCESS ---------- */
+        .process { padding: 90px 0 100px; }
+        .process-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+        }
+        .step {
+            padding: 30px 26px; border-radius: 16px;
+            border: 1px solid var(--border);
+            background: linear-gradient(160deg, rgba(46,123,255,0.07) 0%, rgba(18,18,24,0.4) 55%, transparent 100%);
+            position: relative; transition: var(--transition);
+        }
+        .step:hover {
+            border-color: rgba(255,46,77,0.35);
+            transform: translateY(-5px);
+            box-shadow: 0 22px 40px -22px rgba(0,0,0,0.9);
+        }
+        .step-num {
+            font-family: var(--display); font-size: 1.9rem; font-weight: 700;
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block; margin-bottom: 14px; line-height: 1;
+        }
+        .step h4 {
+            font-family: var(--display); font-size: 1.05rem;
+            font-weight: 700; margin-bottom: 10px;
+        }
+        .step p { color: var(--muted); font-size: 0.88rem; }
+
+        /* ---------- CTA BAND WITH VIDEO ---------- */
+        .cta-band {
+            position: relative; isolation: isolate; overflow: hidden;
+            margin: 0 32px 80px; padding: 90px 40px;
+            border-radius: 28px; text-align: center;
+            border: 1px solid rgba(46,123,255,0.25);
+        }
+        .cta-band .video-bg {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -2;
+            filter: brightness(0.35) saturate(1.2) contrast(1.05);
+        }
+        .cta-band .hero-overlay {
+            position: absolute; inset: 0; z-index: -1;
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(46,123,255,0.18) 0%, transparent 65%),
+                linear-gradient(180deg, rgba(10,10,12,0.9), rgba(10,10,12,0.96));
+        }
+        .cta-band h2 {
+            font-family: var(--display);
+            font-size: clamp(2rem, 4.4vw, 3.2rem);
+            font-weight: 500; letter-spacing: -0.03em; line-height: 1.1;
+            margin-bottom: 18px; position: relative;
+        }
+        .cta-band h2 span {
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cta-band p {
+            color: #C7C7D1; max-width: 520px; margin: 0 auto 34px;
+            font-size: 1.05rem; position: relative;
+        }
+        .cta-band .btn { position: relative; }
+
+        /* ---------- FOOTER ---------- */
+        footer { padding: 60px 0 30px; }
+        .footer-top {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            flex-wrap: wrap; gap: 40px; margin-bottom: 60px;
+        }
+        .footer-brand h3 {
+            font-family: var(--display); font-size: 2rem; font-weight: 700;
+            letter-spacing: -0.03em; margin-bottom: 12px;
+        }
+        .footer-brand h3 span {
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .footer-brand p { color: var(--muted); max-width: 300px; }
+        .footer-links { display: flex; gap: 80px; }
+        .footer-col h4 {
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 20px; color: var(--muted);
+        }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: var(--text); font-weight: 500; position: relative; }
+        .footer-col ul li a::after {
+            content: ''; position: absolute; bottom: -2px; left: 0;
+            width: 0; height: 1px;
+            background: linear-gradient(90deg, var(--accent), var(--red));
+            transition: width 0.3s ease;
+        }
+        .footer-col ul li a:hover::after { width: 100%; }
+        .footer-col ul li a:hover { color: var(--accent); }
+        .footer-bottom {
+            border-top: 1px solid var(--border); padding-top: 30px;
+            display: flex; justify-content: space-between;
+            color: var(--muted); font-size: 0.9rem; flex-wrap: wrap; gap: 12px;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 1080px) {
+            .cards-grid { grid-template-columns: repeat(2, 1fr); }
+            .process-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .page-hero { padding: 110px 0 90px; }
+            .cta-band { margin: 0 20px 60px; padding: 70px 24px; border-radius: 20px; }
+            .footer-top { flex-direction: column; }
+            .footer-links { flex-direction: column; gap: 40px; }
+        }
+        @media (max-width: 620px) {
+            .cards-grid, .process-grid { grid-template-columns: 1fr; }
+            .hero-actions .btn { width: 100%; justify-content: center; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark"><i class="fas fa-wave-square"></i></div>
+                Flow<span style="color: var(--red);">.</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#work">Work</a>
+                <a href="services.html" class="active">Services</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <a href="contact.html" class="nav-cta">Start a Project</a>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO WITH VIDEO BACKGROUND -->
+        <section class="page-hero">
+            <video class="video-bg" autoplay muted loop playsinline
+                   poster="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=85">
+                <source src="https://cdn.pixabay.com/video/2020/09/08/49246-457864154_large.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+
+            <div class="container hero-content">
+                <span class="hero-label">Our Services</span>
+                <h1>Everything digital.<br>Under one <span>roof.</span></h1>
+                <p>Websites, business systems, brands, flyers — if it lives on a screen or a page, we design and build it. Every engagement starts with a written quotation.</p>
+                <div class="hero-actions">
+                    <a href="contact.html" class="btn btn-primary">
+                        Request a Quotation <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="index.html#work" class="btn btn-ghost">View Our Work</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICE CARDS -->
+        <section class="services-block container">
+            <div class="section-head">
+                <span class="eyebrow">What We Build</span>
+                <h2>Digital products, <span>delivered end to end.</span></h2>
+                <p>Pick a service below — or combine several. We'll scope it, price it, and send you a clear quotation before any work begins.</p>
+            </div>
+
+            <div class="cards-grid">
+
+                <a href="contact.html?service=website" class="svc-card">
+                    <span class="svc-num">01</span>
+                    <div class="svc-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Websites &amp; Web Apps</h3>
+                    <p>Fast, responsive marketing sites and full-scale web applications built to convert and scale.</p>
+                    <div class="svc-tags"><span>Landing pages</span><span>Web apps</span></div>
+                    <span class="svc-cta">Request quotation <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html?service=systems" class="svc-card">
+                    <span class="svc-num">02</span>
+                    <div class="svc-icon"><i class="fas fa-gears"></i></div>
+                    <h3>Business Systems</h3>
+                    <p>Custom dashboards, booking systems, CRMs and internal tools that replace spreadsheets and paperwork.</p>
+                    <div class="svc-tags"><span>Dashboards</span><span>Automation</span></div>
+                    <span class="svc-cta">Request quotation <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html?service=ecommerce" class="svc-card">
+                    <span class="svc-num">03</span>
+                    <div class="svc-icon"><i class="fas fa-cart-shopping"></i></div>
+                    <h3>E-Commerce Stores</h3>
+                    <p>Online stores with carts, checkout flows and WhatsApp order handoff — built for local buyers.</p>
+                    <div class="svc-tags"><span>Checkout</span><span>Inventory</span></div>
+                    <span class="svc-cta">Request quotation <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html?service=branding" class="svc-card">
+                    <span class="svc-num">04</span>
+                    <div class="svc-icon"><i class="fas fa-pen-nib"></i></div>
+                    <h3>Logos &amp; Brand Identity</h3>
+                    <p>Distinct marks, colour systems and brand guidelines that make small businesses look serious.</p>
+                    <div class="svc-tags"><span>Logo suite</span><span>Guidelines</span></div>
+                    <span class="svc-cta">Request quotation <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html?service=print" class="svc-card">
+                    <span class="svc-num">05</span>
+                    <div class="svc-icon"><i class="fas fa-print"></i></div>
+                    <h3>Flyers &amp; Print Design</h3>
+                    <p>Flyers, posters, business cards and social banners — print-ready files delivered in every format.</p>
+                    <div class="svc-tags"><span>Flyers</span><span>Business cards</span></div>
+                    <span class="svc-cta">Request quotation <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html?service=pos" class="svc-card">
+                    <span class="svc-num">06</span>
+                    <div class="svc-icon"><i class="fas fa-cash-register"></i></div>
+                    <h3>Point of Sale</h3>
+                    <p>Lightweight POS systems for shops and spaza stores, with stock tracking and printable receipts.</p>
+                    <div class="svc-tags"><span>Sales</span><span>Stock control</span></div>
+                    <span class="svc-cta">Request quotation <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html?service=content" class="svc-card">
+                    <span class="svc-num">07</span>
+                    <div class="svc-icon"><i class="fas fa-hashtag"></i></div>
+                    <h3>Social Media &amp; Content</h3>
+                    <p>Post templates, content packs and monthly design support to keep your feed consistent.</p>
+                    <div class="svc-tags"><span>Templates</span><span>Monthly packs</span></div>
+                    <span class="svc-cta">Request quotation <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html?service=support" class="svc-card">
+                    <span class="svc-num">08</span>
+                    <div class="svc-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+                    <h3>Maintenance &amp; Support</h3>
+                    <p>Hosting, updates, backups and small changes — keep your product healthy after launch.</p>
+                    <div class="svc-tags"><span>Hosting</span><span>Updates</span></div>
+                    <span class="svc-cta">Request quotation <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- QUOTATION PROCESS -->
+        <section class="process container">
+            <div class="section-head">
+                <span class="eyebrow">How It Works</span>
+                <h2>Quotations issued <span>on request.</span></h2>
+                <p>No fixed price lists — every project is scoped properly before we quote. Most quotations are sent within 48 hours.</p>
+            </div>
+
+            <div class="process-grid">
+                <div class="step">
+                    <span class="step-num">01</span>
+                    <h4>Tell us what you need</h4>
+                    <p>Send your brief through the contact form, WhatsApp or email. A rough idea is enough to start.</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">02</span>
+                    <h4>We scope it</h4>
+                    <p>We ask a few questions, confirm features and timelines, and flag anything that affects cost.</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">03</span>
+                    <h4>You receive a quotation</h4>
+                    <p>A written quote with deliverables, milestones and payment terms — usually within 48 hours.</p>
+                </div>
+                <div class="step">
+                    <span class="step-num">04</span>
+                    <h4>We build</h4>
+                    <p>Approve the quote and we start. Progress updates throughout, delivery on the agreed date.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA BAND -->
+        <section class="cta-band">
+            <video class="video-bg" autoplay muted loop playsinline
+                   poster="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1920&q=85">
+                <source src="https://cdn.pixabay.com/video/2022/03/11/110827-688846728_large.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <h2>Ready for a <span>quotation?</span></h2>
+            <p>Tell us what you're building. We'll come back with a clear scope, a firm price and a delivery date.</p>
+            <a href="contact.html" class="btn btn-primary">Request a Quotation <i class="fas fa-arrow-right"></i></a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h3>Flow<span>.</span></h3>
+                    <p>Building the digital infrastructure for Botswana's most ambitious businesses.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="index.html#work">Work</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:hello@flow.co.bw">hello@flow.co.bw</a></li>
+                            <li><a href="tel:+26771234567">+267 71 234 567</a></li>
+                            <li><a href="contact.html">Gaborone, Botswana</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Socials</h4>
+                        <ul>
+                            <li><a href="#">Instagram</a></li>
+                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="#">TikTok</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Flow Digital Studio.</span>
+                <span>Built in Botswana 🇧🇼</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
